@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Bookmark</title>
+</head>
+<body>
+    <nav>
+        <h1>bookmark</h1>
+        <ul class="links">
+            <li><h3><a href="/dashboard">my lists</a></h3></li>
+            <li><h3><a href="/">search</a></h3></li>
+        </ul>
+        {% if session['user_id'] %}
+        <h2><a href="/logout">logout</a></h2>
+        {% else %}
+        <h2><a href="/login">login</a></h2>
+        {% endif %}
+    </nav>
+
+    <div class="formbox">
+        <div class="buttonbox">
+            <div id="btn"></div>
+            <button type="button" class="toggle-btn" onclick="login()">Login</button>
+            <button type="button" class="toggle-btn" onclick="register()">Register</button>
+        </div>
+
+        {% with messages = get_flashed_messages(category_filter = 'register') %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p style ="color:red; text-align:center;">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form id="login" class="input-group" action="/loginuser" method="POST">
+            <input name="username" type="text" class="input-field" placeholder="enter username" required>
+            <input name="password" type="password" class="input-field" placeholder="enter password" required>
+            <button type="submit" class="submit">Login</button>
+        </form>
+
+        {% with messages = get_flashed_messages(category_filter = 'login') %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p style ="color:red; text-align:center;">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form id="register" class="input-group" action="/register" method="POST">
+            <input name="username" type="text" class="input-field" placeholder="enter username" required>
+            <input name="password" type="password" class="input-field" placeholder="enter password" required>
+            <input name="confirm-password" type="password" class="input-field" placeholder="confirm password" required>
+            <button type="submit" class="submit">Register</button>
+        </form>
+    </div>
+    
+
+    <script src="../static/script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Bookmark</title>
+</head>
+<body>
+    <nav>
+        <h1>bookmark</h1>
+        <ul class="links">
+            <li><h3><a href="/dashboard">my lists</a></h3></li>
+            <li><h3><a href="/">search</a></h3></li>
+        </ul>
+        {% if session['user_id'] %}
+        <h2><a href="/logout">logout</a></h2>
+        {% else %}
+        <h2><a href="/login">login</a></h2>
+        {% endif %}
+    </nav>
+    <main class="container">
+        <h2>Search results for "{{query}}":</h2>
+
+        {% for book in books %}
+
+        <div class="book">
+            <h3><a href="">{{ book.title }}</a></h3>
+            <div class="bookimg">
+                <img class="bookcover" src="{{ book.thumbnail }}" alt="book thumnail">
+                <div class="bookinfo">
+                    <p>Author: {{ book.author }}</p>
+                    <p>Publisher: {{ book.publisher }}</p>
+                    <p>Average Rating: {{ book.rating }}</p>
+                </div>
+            </div>
+            {{ book.description }}
+            <form class="buttons">
+                <button>Add to my list</button>
+                <a href="{{ book.link }}" target="_blank"><button type="button" class="blue">View on Google Books</button></a>
+            </form>
+        </div>
+
+        {% endfor %}
+    </main>
+    <script src="../static/script.js" defer></script>
+</body>
+</html>
