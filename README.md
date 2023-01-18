@@ -5,7 +5,7 @@ WIP application made to organize books into lists using Google Books API
 ![Search Results](bookmark/flask_app/static/imgs/booksearch.jpg)
 
 ## Built with:
-* [Python]
-* [Flask]
-* [Jinja2]
-* [Google Books API]
+* Python
+* Flask
+* Jinja2
+* Google Books API
